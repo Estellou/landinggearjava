@@ -22,18 +22,23 @@ public class DoorView extends Analyser{
 
 	@Override
 	public void update(Observable o, Object arg1) {
-		Captor wheel = (Captor) o;
-		
-		switch(wheel.name){
-		case "open":
-			this.label.setIcon(open);
-			break;
-		case "progress":
-			this.label.setIcon(progress);
-			break;
-		case "close":
-			this.label.setIcon(close);
-			break;
+		Captor door = (Captor) o;
+		System.out.println("OBSERVER: Start l26 :Door View" + door.name);
+		if(door.state) {
+			switch(door.name){
+			case "open":
+				System.out.println("=>open door");
+				this.label.setIcon(open);
+				break;
+			case "progress":
+				System.out.println("=>progress door");
+				this.label.setIcon(progress);
+				break;
+			case "close":
+				System.out.println("=>close door");
+				this.label.setIcon(close);
+				break;
+			}
 		}
 	}
 

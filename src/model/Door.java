@@ -4,27 +4,32 @@ import view.DoorView;
 
 public class Door{
 
-	public Captor dooropen = new Captor("doorOpen", false);
-	public Captor doorprogress = new Captor("doorProgress", false);
-	public Captor doorclose = new Captor("doorClose", true);
+	public Captor open = new Captor("open", false);
+	public Captor progress = new Captor("progress", false);
+	public Captor close = new Captor("close", true);
 	
 	public Door(DoorView observer){
-		dooropen.addObserver(observer);
-		doorprogress.addObserver(observer);
-		doorclose.addObserver(observer);
+		open.addObserver(observer);
+		progress.addObserver(observer);
+		close.addObserver(observer);
 	}
 	
-	public void setStateDoorOpen(boolean state) {
-		this.dooropen.setState(state);
+	public void setStateOpen(boolean state) {
+		this.open.setState(state);
+		System.out.println("l19 : DOOR - SetStatedoorOpen");
 	}
 	
-	public void setStateDoorProgess(boolean state) {
-		this.doorprogress.setState(state);
+	public void setStateProgress(boolean state) {
+		this.progress.setState(state);
+		System.out.println("l24 : DOOR - SetStatedoorProgress");
 	}
 	
-	public void setStateDoorClose(boolean state) {
-		this.doorclose.setState(state);
+	public void setStateClose(boolean state) {
+		this.close.setState(state);
+		System.out.println("l29 : DOOR - SetStatedoorClose");
 	}
+	
+	
 	
 	
 }

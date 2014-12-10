@@ -4,13 +4,17 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import view.DoorView;
+
 //System control
 public class HandleUpListener implements ChangeListener{
 	
-	public SystemComputer system;
+	public SystemComputer wheelCtrl;
+	public SystemDoor doorCtrl;
 	
-	public HandleUpListener(SystemComputer system){
-		this.system = system;
+	public HandleUpListener(SystemComputer wheelCtrl, DoorView door){
+		this.wheelCtrl = wheelCtrl;
+		this.doorCtrl = new SystemDoor(door);
 	}
 
 	@Override
@@ -19,7 +23,14 @@ public class HandleUpListener implements ChangeListener{
 		JSlider source = (JSlider)e.getSource();
 		if (!source.getValueIsAdjusting()) {
 			boolean handle = (((JSlider) e.getSource()).getValue() == 0) ? false : true;
-			this.system.progress(handle);
+			this.wheelCtrl.progress(handle);
+			if(this.doorCtrl.openTheDoor()){
+				if(this.wheelCtrl.update()){
+					this.doorCtrl.closeTheDoor();
+				} else {
+					//TODO: ERROR => ajouter la commande manuel
+				}
+			}
 		}
 	}
 	

@@ -31,7 +31,7 @@ public class Command extends JFrame{
 	
 	public Command(){
 		SystemComputer dashboard = new SystemComputer(lights, wheels);
-		HandleUpListener gear = new HandleUpListener(dashboard);
+		HandleUpListener gear = new HandleUpListener(dashboard, door);
 		
 		this.setSize(new Dimension(250,250));
 		this.setTitle(name);
