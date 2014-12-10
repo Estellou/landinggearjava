@@ -7,9 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import model.Captor;
-import controler.Analyser;
+import controler.AnalyserCaptor;
 
-public class WheelsView extends Analyser{
+public class WheelsView extends AnalyserCaptor{
 	public JLabel label;
 	
 	public static ImageIcon up =  new ImageIcon("images/up.png");
@@ -27,13 +27,13 @@ public class WheelsView extends Analyser{
 		Captor wheel = (Captor) o;
 		
 		switch(wheel.name){
-		case "up":
+		case "wheelup":
 			this.label.setIcon(up);
 			break;
-		case "down":
+		case "wheeldown":
 			this.label.setIcon(down);
 			break;
-		case "prg":
+		case "wheelprg":
 			this.label.setIcon(prg);
 			break;
 		}

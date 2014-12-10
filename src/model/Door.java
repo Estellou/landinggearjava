@@ -1,6 +1,7 @@
 package model;
 
 import view.DoorView;
+import controler.SystemComputer;
 
 public class Door{
 
@@ -8,9 +9,11 @@ public class Door{
 	public Captor progress = new Captor("progress", false);
 	public Captor close = new Captor("close", true);
 	
-	public Door(DoorView observer){
+	public Door(DoorView observer, SystemComputer system){
 		open.addObserver(observer);
+		open.addObserver(system);
 		progress.addObserver(observer);
+		//TODO : add system as observer to control it
 		close.addObserver(observer);
 	}
 	

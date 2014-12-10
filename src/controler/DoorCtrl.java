@@ -7,34 +7,18 @@ import java.util.TimerTask;
 import model.Door;
 import view.DoorView;
 
-public class SystemDoor{
+public class DoorCtrl extends Observable{
 
 	public Timer timer = new Timer();
 	public Door door;
 	public boolean state;
 	
-	public SystemDoor(DoorView doorView){
-		this.door = new Door(doorView);
+	public DoorCtrl(DoorView doorView, SystemComputer system){
+		this.door = new Door(doorView, system);
 	}
 	
-	//TODO: Warning DRINK
-	/*public void mooveTheDoor(boolean order){
-		if(order){//open the door
-			if(this.openTheDoor()){
-				setChanged();
-				notifyObservers(order);
-			};
-		} else {//close the door
-			if(this.closeTheDoor()){
-				setChanged();
-				notifyObservers(order);
-			};
-		}
-		
-	}*/
-	
 	//TODO: Warning always return true;
-	public boolean openTheDoor(){
+	public void openTheDoor(){
 		this.door.setStateClose(false);
 		this.door.setStateProgress(true);
 		
@@ -42,17 +26,16 @@ public class SystemDoor{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				SystemDoor that = SystemDoor.this;
+				DoorCtrl that = DoorCtrl.this;
 				that.door.setStateProgress(false);
 				that.door.setStateOpen(true);
 			}			
 		},1000);
-		
-		return true;
 	}
 	
 	//TODO: Warning always return true;
-	public boolean closeTheDoor(){
+	public void closeTheDoor(){
+		System.out.println("DOOR CTRL l54: Close Action");
 		this.door.setStateOpen(false);
 		this.door.setStateProgress(true);
 		
@@ -60,11 +43,10 @@ public class SystemDoor{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				SystemDoor that = SystemDoor.this;
+				DoorCtrl that = DoorCtrl.this;
 				that.door.setStateProgress(false);
 				that.door.setStateClose(true);
 			}			
-		},4000);
-		return true;
+		},1000);
 	}
 }

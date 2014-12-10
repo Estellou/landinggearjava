@@ -6,9 +6,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import model.Captor;
-import controler.Analyser;
+import controler.AnalyserCaptor;
 
-public class DoorView extends Analyser{
+public class DoorView extends AnalyserCaptor{
 	
 	public JLabel label;
 	

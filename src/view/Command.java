@@ -11,8 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+import controler.DoorCtrl;
 import controler.HandleUpListener;
 import controler.SystemComputer;
+import controler.WheelCtrl;
 
 //commmande interface de pilotage
 public class Command extends JFrame{
@@ -30,8 +32,8 @@ public class Command extends JFrame{
 	public JPanel paneldoor =  new JPanel();*/
 	
 	public Command(){
-		SystemComputer dashboard = new SystemComputer(lights, wheels);
-		HandleUpListener gear = new HandleUpListener(dashboard, door);
+		SystemComputer system = new SystemComputer(lights, wheels, door);
+		HandleUpListener gear = new HandleUpListener(system);
 		
 		this.setSize(new Dimension(250,250));
 		this.setTitle(name);

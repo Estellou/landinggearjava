@@ -6,10 +6,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import model.Captor;
+import controler.AnalyserCaptor;
 
-import controler.Analyser;
-
-public class LightsView extends Analyser{
+public class LightsView extends AnalyserCaptor{
 	public JLabel label1;
 	public JLabel label2;
 	public JLabel label3;

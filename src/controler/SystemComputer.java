@@ -1,75 +1,51 @@
 package controler;
 
 import java.util.Observable;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.swing.JPanel;
-
-import model.Door;
-import model.Lights;
-import model.Wheels;
+import model.Captor;
 import view.DoorView;
 import view.LightsView;
 import view.WheelsView;
 
-public class SystemComputer{
-	public Lights lights;
-	public boolean handleUp = true;
-	public Wheels wheels;
-	public Door door;
-	public Timer timer = new Timer();
-	public JPanel LightsBoard;
-	public boolean ACCOMPLISHED = true;
+public class SystemComputer extends AnalyserCaptor{
+	public WheelCtrl wc;
+	public DoorCtrl dc;
 	
-	public SystemComputer(LightsView lightsview, WheelsView wheelsview){
-		this.lights = new Lights(lightsview);
-		this.wheels = new Wheels(wheelsview);
+	public SystemComputer(LightsView lv, WheelsView wv, DoorView dv){
+		this.wc = new WheelCtrl(lv, wv, this);
+		this.dc = new DoorCtrl(dv, this);
 	}
 	
-	public void progress(boolean handleUp){
+	public void launchCommand(boolean handle){
+		this.wc.progress(handle);
+		this.dc.openTheDoor();
 		
-		this.handleUp = handleUp;
-		//initialize light
-		//this.door.setStateDoorOpen(false);
-		this.lights.setLightGreen(false);
-		this.lights.setLightRed(false);
-		
-		//setprogress
-		this.lights.setLightOrange(true);
-
 	}
 
-	public boolean update() {
-	
-		//UPDATE LIGHT=ORANGE/WHEEL PROGRESS
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				SystemComputer that = SystemComputer.this;
-				if(that.wheels.progressWheel())
-				that.lights.setLightOrange(false);
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		Captor door = (Captor) o;
+		if(door.state) {
+			switch(door.name){
+				case "open":
+					System.out.println("=>open door");
+					this.wc.update();
+					break;
+			
+				case "wheeldown":
+				case "wheelup":
+					System.out.println("=>close door");
+					//move the wheel;
+					this.dc.closeTheDoor();
+					break;
 			}
-		}, 2000);
-		System.out.println("###LIGHT AND WHEEL###");
+		}	
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		
-		//UPDATE LIGHT/ WHEEL MOOVE
-		timer.schedule(new TimerTask(){	
-			@Override
-			public void run() {
-				SystemComputer that = SystemComputer.this;
-				if (that.wheels.afterHandle(that.handleUp)) {
-					if (!that.handleUp) {//system down
-						that.lights.setLightGreen(true);
-					}
-					that.ACCOMPLISHED = true;
-				} else {//si erreur sur la roue déclenché
-					that.lights.setLightRed(true);
-					that.ACCOMPLISHED = false;
-				}
-			}
-		},3000);
-		
-		return ACCOMPLISHED;
 	}
 }
