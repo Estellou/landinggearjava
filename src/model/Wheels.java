@@ -40,15 +40,13 @@ public class Wheels extends Observable {
 				this.wheelDown.setState(true);
 				this.wheelDown.setState(false);
 			}
-
 			return true;
 		}
 		return false;
 	}
 
-	public boolean progressWheel() {
+	public void progressWheel() {
 		this.wheelProgress.setState(true);
-		return true;
 	}
 
 }

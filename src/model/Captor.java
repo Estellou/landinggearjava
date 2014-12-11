@@ -25,6 +25,7 @@ public class Captor  extends Observable{
 	}
 
 	public void setState(boolean state) {
+		
 		this.state = state;
 		setChanged();
 		notifyObservers(state);

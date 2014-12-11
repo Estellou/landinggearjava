@@ -12,24 +12,26 @@ public class Door{
 	public Door(DoorView observer, SystemComputer system){
 		open.addObserver(observer);
 		open.addObserver(system);
+		
 		progress.addObserver(observer);
+		progress.addObserver(system);
 		//TODO : add system as observer to control it
 		close.addObserver(observer);
+		close.addObserver(system);
 	}
 	
 	public void setStateOpen(boolean state) {
 		this.open.setState(state);
-		System.out.println("l19 : DOOR - SetStatedoorOpen");
 	}
 	
 	public void setStateProgress(boolean state) {
 		this.progress.setState(state);
-		System.out.println("l24 : DOOR - SetStatedoorProgress");
 	}
 	
 	public void setStateClose(boolean state) {
+		System.out.println("_In Captor Door: state door is changed__ old state = " + this.close.state);
 		this.close.setState(state);
-		System.out.println("l29 : DOOR - SetStatedoorClose");
+		System.out.println("_                                     __ new state = " + this.close.state);
 	}
 	
 	

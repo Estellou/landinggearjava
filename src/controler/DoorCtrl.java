@@ -17,8 +17,10 @@ public class DoorCtrl extends Observable{
 		this.door = new Door(doorView, system);
 	}
 	
-	//TODO: Warning always return true;
 	public void openTheDoor(){
+		System.out.println("DoorCtrl: Initial State of Door: " + this.door.close.name + " "  + this.door.close.state);
+		System.out.println("DoorCtrl: Initial State of Door: " + this.door.progress.name + " "  + this.door.progress.state);
+		System.out.println("DoorCtrl: Initial State of Door: " + this.door.open.name + " "  + this.door.open.state);
 		this.door.setStateClose(false);
 		this.door.setStateProgress(true);
 		
@@ -33,9 +35,7 @@ public class DoorCtrl extends Observable{
 		},1000);
 	}
 	
-	//TODO: Warning always return true;
 	public void closeTheDoor(){
-		System.out.println("DOOR CTRL l54: Close Action");
 		this.door.setStateOpen(false);
 		this.door.setStateProgress(true);
 		
