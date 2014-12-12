@@ -4,13 +4,17 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.Captor;
+import view.GearView;
+import view.LightsView;
+
 //System control
 public class HandleUpListener implements ChangeListener{
 	
-	public SystemComputer system;
+	public SystemComputer systemGear1;
 	
-	public HandleUpListener(SystemComputer system){
-		this.system = system;
+	public HandleUpListener(SystemComputer systemGear1){
+		this.systemGear1 = systemGear1;
 	}
 
 	@Override
@@ -20,7 +24,7 @@ public class HandleUpListener implements ChangeListener{
 		if (!source.getValueIsAdjusting()) {
 			boolean handle = (((JSlider) e.getSource()).getValue() == 0) ? false : true;
 			//progresss system
-			this.system.launchCommand(handle);
+			this.systemGear1.launchCommand(handle);
 		}
 	}
 	

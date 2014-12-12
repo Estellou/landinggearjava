@@ -6,10 +6,9 @@ import java.util.TimerTask;
 
 import javax.swing.JPanel;
 
+import model.Captor;
 import model.Door;
-import model.Lights;
 import model.Wheels;
-import view.LightsView;
 import view.WheelsView;
 
 public class WheelCtrl{
@@ -19,10 +18,12 @@ public class WheelCtrl{
 	public Door door;
 	public Timer timer = new Timer();
 	public JPanel LightsBoard;
+	public Captor signal;
 	
 	//TODO: Divise wheel and light
-	public WheelCtrl(WheelsView wheelsview, SystemComputer system){
+	public WheelCtrl(WheelsView wheelsview, Captor signal,SystemComputer system){
 		this.wheels = new Wheels(wheelsview, system);
+		this.signal = signal;
 	}
 	
 	public void progress(boolean handleUp){
@@ -51,6 +52,8 @@ public class WheelCtrl{
 					}
 				} else {//si erreur sur la roue déclenché
 						//that.lights.setLightRed(true);
+					//send error
+					that.signal.setState(true);
 				}
 			}
 		},1000);

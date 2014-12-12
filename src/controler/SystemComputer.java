@@ -13,9 +13,10 @@ public class SystemComputer extends AnalyserCaptor{
 	public LightCtrl lc;
 	public boolean gearState = true;
 	
-	public SystemComputer(LightsView lv, WheelsView wv, DoorView dv){
+	public SystemComputer(LightsView lv, WheelsView wv, DoorView dv, Captor signal){
+		signal.addObserver(this);
 		this.lc = new LightCtrl(lv);
-		this.wc = new WheelCtrl(wv, this);
+		this.wc = new WheelCtrl(wv, signal, this);
 		this.dc = new DoorCtrl(dv, this);
 	}
 	
@@ -66,6 +67,9 @@ public class SystemComputer extends AnalyserCaptor{
 					//move the wheel;
 					this.dc.closeTheDoor();
 					break;	
+				case "error":
+					this.lc.gearError();
+					break;
 			}	
 		}	
 	}
