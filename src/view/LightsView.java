@@ -13,10 +13,10 @@ public class LightsView extends AnalyserCaptor{
 	public JLabel label2;
 	public JLabel label3;
 
-	public static ImageIcon green = new ImageIcon("images/green.jpg");
-	public static ImageIcon red = new ImageIcon("images/red.jpg");
-	public static ImageIcon orange = new ImageIcon("images/orange.jpg");
-	public static ImageIcon none = new ImageIcon("images/none.jpg");
+	public static ImageIcon green = new ImageIcon("images/green.png");
+	public static ImageIcon red = new ImageIcon("images/red.png");
+	public static ImageIcon orange = new ImageIcon("images/orange.png");
+	public static ImageIcon none = new ImageIcon("images/none.png");
 
 	public LightsView() {
 		this.label1 = new JLabel(" ", none, JLabel.CENTER);

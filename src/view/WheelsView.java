@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -12,9 +13,9 @@ import controler.AnalyserCaptor;
 public class WheelsView extends AnalyserCaptor{
 	public JLabel label;
 	
-	public static ImageIcon up =  new ImageIcon("images/up.png");
-	public static ImageIcon prg =  new ImageIcon("images/prg.png");
-	public static ImageIcon down =  new ImageIcon("images/down.png");
+	public static ImageIcon up =  new ImageIcon("images/wheelUp.png");
+	public static ImageIcon prg =  new ImageIcon("images/wheelPrg.png");
+	public static ImageIcon down =  new ImageIcon("images/wheelDown.png");
 	
 	
 	public WheelsView(){

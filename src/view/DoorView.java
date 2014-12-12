@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -12,9 +13,9 @@ public class DoorView extends AnalyserCaptor{
 	
 	public JLabel label;
 	
-	public static ImageIcon open = new ImageIcon("images/open.png");
-	public static ImageIcon progress = new ImageIcon("images/progress.png");
-	public static ImageIcon close = new ImageIcon("images/close.png");
+	public static ImageIcon open = new ImageIcon("images/doorOpen.png");
+	public static ImageIcon progress = new ImageIcon("images/doorPrg.png");
+	public static ImageIcon close = new ImageIcon("images/doorClose.png");
 	
 	public DoorView() {
 		this.label = new JLabel(" ", close, JLabel.CENTER);
