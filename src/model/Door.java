@@ -1,6 +1,7 @@
 package model;
 
 import view.DoorView;
+import controler.LightCtrl;
 import controler.SystemComputer;
 
 public class Door{
@@ -9,15 +10,18 @@ public class Door{
 	public Captor progress = new Captor("progress", false);
 	public Captor close = new Captor("close", true);
 	
-	public Door(DoorView observer, SystemComputer system){
+	public Door(DoorView observer, SystemComputer system, LightCtrl lc){
 		open.addObserver(observer);
 		open.addObserver(system);
+		open.addObserver(lc);
 		
 		progress.addObserver(observer);
 		progress.addObserver(system);
-		//TODO : add system as observer to control it
+		progress.addObserver(lc);
+		
 		close.addObserver(observer);
 		close.addObserver(system);
+		close.addObserver(lc);
 	}
 	
 	public void setStateOpen(boolean state) {
@@ -29,9 +33,7 @@ public class Door{
 	}
 	
 	public void setStateClose(boolean state) {
-		System.out.println("_In Captor Door: state door is changed__ old state = " + this.close.state);
 		this.close.setState(state);
-		System.out.println("_                                     __ new state = " + this.close.state);
 	}
 	
 	

@@ -15,24 +15,24 @@ public class WheelCtrl{
 	
 	public boolean handleUp = true;
 	public Wheels wheels;
-	public Door door;
 	public Timer timer = new Timer();
 	public JPanel LightsBoard;
-	public Captor signal;
+	public Captor signalError;
+	
+	public boolean error = false;
 	
 	//TODO: Divise wheel and light
-	public WheelCtrl(WheelsView wheelsview, Captor signal,SystemComputer system){
-		this.wheels = new Wheels(wheelsview, system);
-		this.signal = signal;
+	public WheelCtrl(String name, WheelsView wheelsview ,SystemComputer system, LightCtrl lc){
+		this.wheels = new Wheels(name, wheelsview, system, lc);
+		this.signalError = new Captor("wheelError", false);
+		this.signalError.addObserver(lc);
 	}
 	
 	public void progress(boolean handleUp){
-		//NOTE TEAMER TASK DON't WORK HERE
 		this.handleUp = handleUp;
 	}
 
 	public void update() {
-		//UPDATE LIGHT=ORANGE/WHEEL PROGRESS
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -41,19 +41,19 @@ public class WheelCtrl{
 			}
 		}, 1000);
 		
-		//UPDATE LIGHT/ WHEEL MOOVE
+		//On déclenche le mouvement de la roue en fonction de la commande entrée
 		timer.schedule(new TimerTask(){	
 			@Override
 			public void run() {
 				WheelCtrl that = WheelCtrl.this;
 				if (that.wheels.afterHandle(that.handleUp)) {
-					if (!that.handleUp) {//system down
-						//that.lights.setLightGreen(true);
-					}
-				} else {//si erreur sur la roue déclenché
-						//that.lights.setLightRed(true);
-					//send error
-					that.signal.setState(true);
+					//on ne fait rien
+					//tout s'est bien passé
+					//lightCtrl prend la main qui est le system central
+				} else {
+					//si il y a une erreur sur la roue observée
+					//on met alors le signalError 
+					that.signalError.setState(true);
 				}
 			}
 		},1000);

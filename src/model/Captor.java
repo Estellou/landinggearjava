@@ -6,6 +6,13 @@ public class Captor  extends Observable{
 
 	public String name;
 	public boolean state;
+	public String gear = null;
+	
+	public Captor (String name, boolean state, String gear){
+		this.name = name;
+		this.state = state;
+		this.gear = gear;
+	}
 	
 	public Captor (String name, boolean state){
 		this.name = name;
@@ -25,7 +32,6 @@ public class Captor  extends Observable{
 	}
 
 	public void setState(boolean state) {
-		
 		this.state = state;
 		setChanged();
 		notifyObservers(state);

@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;

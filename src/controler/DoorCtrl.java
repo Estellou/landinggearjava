@@ -13,8 +13,8 @@ public class DoorCtrl extends Observable{
 	public Door door;
 	public boolean state;
 	
-	public DoorCtrl(DoorView doorView, SystemComputer system){
-		this.door = new Door(doorView, system);
+	public DoorCtrl(DoorView doorView, SystemComputer system, LightCtrl lc){
+		this.door = new Door(doorView, system, lc);
 	}
 	
 	public void openTheDoor(){

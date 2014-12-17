@@ -11,18 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-import controler.HandleUpListener;
-
 public class DashBoard {
 	// coder design interface
 	public JFrame dashboard = new JFrame();
 	public static String name = "Landing Gear"; 
 	public LightsView lights = new LightsView();
 	public GearView gearView1 = new GearView();
+	public GearView gearView2 = new GearView();
+	public GearView gearView3 = new GearView();
 	public JPanel panellights =  new JPanel();
 	public JSlider handle;
 	
-	GridLayout screenLayout = new GridLayout(0,2);
+	public JPanel screen = new JPanel(new GridLayout(2,1));
 	
 	/*public JPanel panelwheels =  new JPanel();
 	public JPanel paneldoor =  new JPanel();*/
@@ -51,7 +51,12 @@ public class DashBoard {
         
         this.dashboard.add(handle, BorderLayout.WEST);
         this.dashboard.add(this.panellights, BorderLayout.EAST);
-        this.dashboard.add(this.gearView1.gearPanel, BorderLayout.SOUTH);
+        
+        this.screen.add(this.gearView1.gearPanel);
+        this.screen.add(this.gearView2.gearPanel);
+        this.screen.add(this.gearView3.gearPanel);
+        
+        this.dashboard.add(this.screen, BorderLayout.SOUTH);
 		this.dashboard.pack();
 		this.dashboard.setVisible(true);
 		
