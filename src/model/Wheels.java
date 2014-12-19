@@ -4,54 +4,76 @@ import java.util.Observable;
 
 import view.WheelsView;
 import controler.LightCtrl;
-import controler.SystemComputer;
 
 public class Wheels extends Observable {
 
 	public Captor wheelUp;
 	public Captor wheelDown;
 	public Captor wheelProgress;
+	public String name;
 	
-
-	public Wheels(String name, WheelsView observer, SystemComputer system, LightCtrl lc) {
+	/**
+	 * Wheels public constructor: ajout des observers aux capteurs
+	 * @param name
+	 * @param observer
+	 * @param lc
+	 */
+	public Wheels(String name, WheelsView observer, LightCtrl lc) {
+		this.name = name;
 		// initiale state
 		this.wheelUp = new Captor("wheelup", true, name);
 		this.wheelDown = new Captor("wheeldown", false, name);
 		this.wheelProgress = new Captor("wheelprg", false, name);
 
 		this.wheelUp.addObserver(observer);
-		this.wheelUp.addObserver(system);
 		this.wheelUp.addObserver(lc);
 		
 		this.wheelDown.addObserver(observer);
-		this.wheelDown.addObserver(system);
 		this.wheelDown.addObserver(lc);
 		
 		this.wheelProgress.addObserver(observer);
 		this.wheelProgress.addObserver(lc);
 	}
-
-	public boolean afterHandle(boolean command) {
-
-		double random = Math.random();
-		if ((random * 100) >= 30) {
+	/**
+	 * wheels public constructor: sans le set des observers pour les tests
+	 * @param name
+	 */
+	public Wheels(String name) {
+		this.wheelUp = new Captor("wheelup", true, name);
+		this.wheelDown = new Captor("wheeldown", false, name);
+		this.wheelProgress = new Captor("wheelprg", false, name);
+	}
+	
+	/**
+	 * afterHandle simule de "bouger" les roue en fonction de la commander entrée.
+	 * Cette methode génère aléatoirement une erreur. Elle retourne vrai quand la roue est dans la position souhaité et faux quand ce n'est pas le cas
+	 * @param command
+	 * @param randomError : probabilité d'erreur si égal à 0 alors jamais d'erreur généré
+	 * @return
+	 */
+	public boolean afterHandle(boolean command, int randomError) {
+		//command = false => down
+		//command = true => up
+		double random = Math.random()* 100;
+		if (random >=  randomError) {
 			// not error
 			this.wheelProgress.setState(false);
-			this.wheelUp.setState(command);
 			if (command) {
 				this.wheelDown.setState(false);
 				this.wheelUp.setState(true);
-			} else {
+			} else if(!command) {
 				this.wheelDown.setState(true);
-				this.wheelDown.setState(false);
+				this.wheelUp.setState(false);
 			}
 			return true;
 		}
+		//erreur
 		return false;
 	}
-
-	public void progressWheel() {
-		this.wheelProgress.setState(true);
+	
+	
+	public void progressWheel(boolean state) {
+		this.wheelProgress.setState(state);
 	}
 
 }

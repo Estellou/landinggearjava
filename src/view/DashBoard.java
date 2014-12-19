@@ -21,11 +21,7 @@ public class DashBoard {
 	public GearView gearView3 = new GearView();
 	public JPanel panellights =  new JPanel();
 	public JSlider handle;
-	
 	public JPanel screen = new JPanel(new GridLayout(2,1));
-	
-	/*public JPanel panelwheels =  new JPanel();
-	public JPanel paneldoor =  new JPanel();*/
 	
 	public DashBoard(){
 		

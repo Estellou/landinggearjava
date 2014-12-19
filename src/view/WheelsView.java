@@ -24,20 +24,19 @@ public class WheelsView extends AnalyserCaptor{
 	public void update(Observable o, Object arg1) {
 		// TODO Auto-generated method stub
 		Captor wheel = (Captor) o;
-		
-		switch(wheel.name){
-		case "wheelup":
-			this.label.setIcon(up);
-			break;
-		case "wheeldown":
-			this.label.setIcon(down);
-			break;
-		case "wheelprg":
-			this.label.setIcon(prg);
-			break;
+		if(wheel.state){
+			switch(wheel.name){
+			case "wheelup":
+				this.label.setIcon(up);
+				break;
+			case "wheeldown":
+				this.label.setIcon(down);
+				break;
+			case "wheelprg":
+				this.label.setIcon(prg);
+				break;
+			}
 		}
-		
-		
 	}
 
 	@Override

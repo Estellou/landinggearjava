@@ -15,7 +15,6 @@ public class HandleUpListener implements ChangeListener{
 	
 	public HandleUpListener(LightCtrl lc, SystemComputer systemGear1, SystemComputer systemGear2, SystemComputer systemGear3){
 		this.lc = lc;
-		
 		this.systemGear1 = systemGear1;
 		this.systemGear2 = systemGear2;
 		this.systemGear3 = systemGear3;
@@ -27,6 +26,8 @@ public class HandleUpListener implements ChangeListener{
 		JSlider source = (JSlider)e.getSource();
 		if (!source.getValueIsAdjusting()) {
 			boolean handle = (((JSlider) e.getSource()).getValue() == 0) ? false : true;
+			//si down handle = false
+			//si up handle = true
 			//progresss system
 			this.lc.launchCommand(handle);
 			this.lc.gearOnProgress();
