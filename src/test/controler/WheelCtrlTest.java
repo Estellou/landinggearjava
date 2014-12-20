@@ -1,9 +1,9 @@
 package test.controler;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +23,9 @@ public class WheelCtrlTest {
 		this.wcDown = new WheelCtrl("gear Down position");
 		this.wcDown.wheels.wheelDown.state = true;
 		this.wcDown.wheels.wheelUp.state = false;
+		
+		this.wcDown.updateWheel(false);
+		this.wcUp.updateWheel(true);
 	}
 	
 	/*public void updateWheel(boolean handleUp) {
@@ -56,37 +59,57 @@ public class WheelCtrlTest {
 		},2000);
 	}*/
 	
-	@Test
-	public void testUpdateWheelDownWithoutError(){
-		this.wcUp.updateWheel(false);
-		
-		timer.schedule(new TimerTask(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				WheelCtrlTest that = WheelCtrlTest.this;
-				assertTrue(that.wcUp.wheels.wheelProgress.state);
-				assertFalse(that.wcUp.wheels.wheelUp.state);
-				assertFalse(that.wcUp.wheels.wheelDown.state);	
-				assertFalse(that.wcUp.signalError.state);
-			}
+	/*@Test
+	public void testUpdateWheelWithoutError(){
+		try {
+			Thread.sleep(1001);
 			
-		},1000);
-		
-		timer.schedule(new TimerTask(){
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				WheelCtrlTest that = WheelCtrlTest.this;
-				assertFalse(that.wcUp.wheels.wheelProgress.state);
-				assertFalse(that.wcUp.wheels.wheelUp.state);
-				assertTrue(that.wcUp.wheels.wheelDown.state);	
-				assertFalse(that.wcUp.signalError.state);
-			}	},3000);
-	}
+			assertTrue(this.wcUp.wheels.wheelProgress.state);
+			assertTrue(this.wcUp.wheels.wheelUp.state);
+			assertFalse(this.wcUp.wheels.wheelDown.state);	
+			assertFalse(this.wcUp.signalError.state);
+			
+			assertTrue(this.wcDown.wheels.wheelProgress.state);
+			assertFalse(this.wcDown.wheels.wheelUp.state);
+			assertTrue(this.wcDown.wheels.wheelDown.state);	
+			assertFalse(this.wcDown.signalError.state);
+			
+			try {
+				Thread.sleep(3001);
+				
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}*/
 	
 	@Test
+	public void testUpdateWheelDownWithoutError(){
+		
+		try {
+			Thread.sleep(5001);
+			assertFalse(this.wcUp.wheels.wheelProgress.state);
+			assertFalse(this.wcUp.wheels.wheelUp.state);
+			assertTrue(this.wcUp.wheels.wheelDown.state);	
+			assertFalse(this.wcUp.signalError.state);
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	/**@Test
 	public void testUpdateWheelUpWithoutError(){
 		
 		this.wcDown.updateWheel(false);
@@ -157,7 +180,7 @@ public class WheelCtrlTest {
 				assertTrue(that.wcDown.wheels.wheelDown.state);	
 				assertTrue(that.wcDown.signalError.state);
 			}	},3000);
-	}
+	}*/
 	
 	
 }

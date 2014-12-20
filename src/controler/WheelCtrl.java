@@ -13,12 +13,11 @@ import view.WheelsView;
  *
  */
 public class WheelCtrl{
-	
 	public boolean handleUp;
 	public Wheels wheels;
 	public Timer timer = new Timer();
 	public Captor signalError;
-	public int errorProbability = 100;
+	public int errorProbability = 0; //la probabilité qu'il y ait une erreur sur la roue
 	
 	public boolean error = false;
 	/**
@@ -34,14 +33,26 @@ public class WheelCtrl{
 	}
 	
 	/**
-	 * public constructor for testing
+	 * public constructor for testing LightCtrl 
+	 * @param name
+	 */
+	public WheelCtrl(String name, LightCtrl lc ){
+		this.wheels = new Wheels(name, lc);
+		this.signalError = new Captor("wheelError", false);
+		this.signalError.addObserver(lc);
+	}
+	/**
+	 * public constructor for testing WheelsCtrl 
 	 * @param name
 	 */
 	public WheelCtrl(String name){
 		this.wheels = new Wheels(name);
 		this.signalError = new Captor("wheelError", false);
 	}
-
+	/**
+	 * change l'état de la roue en fonction de la commande entrée par l'utilisateur
+	 * @param handleUp
+	 */
 	public void updateWheel(boolean handleUp) {
 		this.handleUp = handleUp;
 		
@@ -53,7 +64,7 @@ public class WheelCtrl{
 			}
 		}, 1000);
 		
-		//On déclenche le mouvement de la roue en fonction de la commande entrée
+		//On déclenche le mouvement de la roue en fonction de la commande d'entrée
 		timer.schedule(new TimerTask(){	
 			@Override
 			public void run() {

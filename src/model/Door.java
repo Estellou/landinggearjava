@@ -29,6 +29,15 @@ public class Door{
 		close.addObserver(lc);
 	}
 	/**
+	 * public constructor for testing LightCtrl
+	 * 
+	 */
+	public Door(LightCtrl lc){
+		open.addObserver(lc);
+		progress.addObserver(lc);
+		close.addObserver(lc);
+	}
+	/**
 	 * public constructor for testing
 	 * 
 	 */

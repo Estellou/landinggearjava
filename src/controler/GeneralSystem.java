@@ -2,10 +2,13 @@ package controler;
 
 import view.DashBoard;
 
+/**Main Class
+ *  Ici est lancé le system
+**/
+
 public class GeneralSystem{
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		DashBoard dash = new DashBoard();
 		LightCtrl lc = new LightCtrl(dash.lights);
 		
@@ -17,7 +20,6 @@ public class GeneralSystem{
 		
 		HandleUpListener gear = new HandleUpListener(lc, gearSystem1, gearSystem2, gearSystem3);
 		dash.handle.addChangeListener(gear);
-		
 	}
 	
 }

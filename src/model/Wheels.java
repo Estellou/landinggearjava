@@ -1,11 +1,9 @@
 package model;
 
-import java.util.Observable;
-
 import view.WheelsView;
 import controler.LightCtrl;
 
-public class Wheels extends Observable {
+public class Wheels{
 
 	public Captor wheelUp;
 	public Captor wheelDown;
@@ -35,7 +33,20 @@ public class Wheels extends Observable {
 		this.wheelProgress.addObserver(lc);
 	}
 	/**
-	 * wheels public constructor: sans le set des observers pour les tests
+	 * wheels public constructor: sans le set de tous les observers pour les tests de LightCtrl 
+	 * @param name
+	 */
+	public Wheels(String name,  LightCtrl lc) {
+		this.wheelUp = new Captor("wheelup", true, name);
+		this.wheelDown = new Captor("wheeldown", false, name);
+		this.wheelProgress = new Captor("wheelprg", false, name);
+		
+		this.wheelUp.addObserver(lc);
+		this.wheelDown.addObserver(lc);
+		this.wheelProgress.addObserver(lc);
+	}
+	/**
+	 * wheels public constructor pour les test de WeelCtrl
 	 * @param name
 	 */
 	public Wheels(String name) {
@@ -43,7 +54,6 @@ public class Wheels extends Observable {
 		this.wheelDown = new Captor("wheeldown", false, name);
 		this.wheelProgress = new Captor("wheelprg", false, name);
 	}
-	
 	/**
 	 * afterHandle simule de "bouger" les roue en fonction de la commander entrée.
 	 * Cette methode génère aléatoirement une erreur. Elle retourne vrai quand la roue est dans la position souhaité et faux quand ce n'est pas le cas

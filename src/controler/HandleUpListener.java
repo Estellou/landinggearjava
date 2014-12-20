@@ -5,7 +5,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
-//System control
+/**
+ * class qui implémente ChangeListener, ici on indique au système les actions de l'utilisateur sur l'interfance (Up/Down)
+ * @author Estelle
+ *
+ */
 public class HandleUpListener implements ChangeListener{
 	
 	public SystemComputer systemGear1;
@@ -28,9 +32,11 @@ public class HandleUpListener implements ChangeListener{
 			boolean handle = (((JSlider) e.getSource()).getValue() == 0) ? false : true;
 			//si down handle = false
 			//si up handle = true
+			
 			//progresss system
 			this.lc.launchCommand(handle);
-			this.lc.gearOnProgress();
+			this.lc.gearOnProgress();//On indique à l'interface que la commande de l'utilisateur a été prise en compte
+			//lancement des différents ensembles roue/porte
 			this.systemGear1.launchCommand(handle);
 			this.systemGear2.launchCommand(handle);
 			this.systemGear3.launchCommand(handle);

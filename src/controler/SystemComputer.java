@@ -17,8 +17,8 @@ public class SystemComputer{
 	 * @param name
 	 */
 	public SystemComputer(String name, LightCtrl lc){
-		this.wc = new WheelCtrl(name);
-		this.dc = new DoorCtrl();
+		this.wc = new WheelCtrl(name, lc);
+		this.dc = new DoorCtrl(lc);
 	}
 	
 	public void launchCommand(boolean handle){
