@@ -42,7 +42,6 @@ public class Door{
 	 * 
 	 */
 	public Door(){
-	
 	}
 	/**
 	 * setter du capteur à utilisiser lorsque la porte est en mode ouverte
