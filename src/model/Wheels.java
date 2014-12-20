@@ -58,20 +58,18 @@ public class Wheels extends Observable {
 		if (random >=  randomError) {
 			// not error
 			this.wheelProgress.setState(false);
-			if (command) {
-				this.wheelDown.setState(false);
-				this.wheelUp.setState(true);
-			} else if(!command) {
-				this.wheelDown.setState(true);
-				this.wheelUp.setState(false);
-			}
+			this.wheelDown.setState(!command);
+			this.wheelUp.setState(command);
 			return true;
 		}
 		//erreur
 		return false;
 	}
 	
-	
+	/**
+	 * progressWheel: change l'état du capteur de la roue en mouvement
+	 * @param state
+	 */
 	public void progressWheel(boolean state) {
 		this.wheelProgress.setState(state);
 	}

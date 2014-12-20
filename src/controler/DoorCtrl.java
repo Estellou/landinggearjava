@@ -16,9 +16,14 @@ public class DoorCtrl extends Observable{
 	public DoorCtrl(DoorView doorView, LightCtrl lc){
 		this.door = new Door(doorView, lc);
 	}
+	/**
+	 * public constructor for testing
+	 */
+	public DoorCtrl(){
+		this.door = new Door();
+	}
 	
 	public void openTheDoor(){
-		
 		timer.schedule(new TimerTask(){
 			@Override
 			public void run() {

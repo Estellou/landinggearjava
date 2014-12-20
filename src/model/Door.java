@@ -29,6 +29,13 @@ public class Door{
 		close.addObserver(lc);
 	}
 	/**
+	 * public constructor for testing
+	 * 
+	 */
+	public Door(){
+	
+	}
+	/**
 	 * setter du capteur à utilisiser lorsque la porte est en mode ouverte
 	 * @param state
 	 */

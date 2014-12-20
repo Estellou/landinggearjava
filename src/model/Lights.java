@@ -22,6 +22,12 @@ public class Lights {
 		this.lightRed.addObserver(observer);
 	}
 	/**
+	 * Lights public constructor: sans ajout de l'observer pour les class de test
+	 * @param observer
+	 */
+	public Lights(){
+	}
+	/**
 	 * 
 	 * @param lightGreen
 	 */

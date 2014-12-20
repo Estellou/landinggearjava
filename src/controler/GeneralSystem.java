@@ -8,21 +8,15 @@ public class GeneralSystem{
 		// TODO Auto-generated method stub
 		DashBoard dash = new DashBoard();
 		LightCtrl lc = new LightCtrl(dash.lights);
-		//Captor systemError = new Captor("errorSystem", false);
-		//new DetectErrors(lc);
 		
 		SystemComputer gearSystem1 = new SystemComputer("gear1", lc , dash.gearView1.wheels, dash.gearView1.door);
 		SystemComputer gearSystem2 = new SystemComputer("gear2", lc, dash.gearView2.wheels, dash.gearView2.door);
 		SystemComputer gearSystem3 = new SystemComputer("gear3", lc, dash.gearView3.wheels, dash.gearView3.door);
 		
 		lc.setArrayGears(gearSystem1, gearSystem2, gearSystem3);
-		/*lc.addObserver(gearSystem1);
-		systemError.addObserver(gearSystem2);
-		systemError.addObserver(gearSystem3);*/
 		
 		HandleUpListener gear = new HandleUpListener(lc, gearSystem1, gearSystem2, gearSystem3);
 		dash.handle.addChangeListener(gear);
-		
 		
 	}
 	

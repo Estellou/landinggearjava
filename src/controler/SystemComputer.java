@@ -12,6 +12,14 @@ public class SystemComputer{
 		this.wc = new WheelCtrl(name, wv, lc);
 		this.dc = new DoorCtrl(dv, lc);
 	}
+	/**
+	 * public constructor for testing
+	 * @param name
+	 */
+	public SystemComputer(String name, LightCtrl lc){
+		this.wc = new WheelCtrl(name);
+		this.dc = new DoorCtrl();
+	}
 	
 	public void launchCommand(boolean handle){
 		this.gearState = handle;

@@ -15,7 +15,11 @@ public class LightCtrl extends AnalyserCaptor{
 	
 	public LightCtrl(LightsView lightsview){
 		this.lights = new Lights(lightsview);
-		//initialize light
+		this.gearsIsUp();
+	}
+	
+	public LightCtrl(){
+		this.lights = new Lights();
 		this.gearsIsUp();
 	}
 	
@@ -54,15 +58,13 @@ public class LightCtrl extends AnalyserCaptor{
 	@Override
 	public void update(Observable o, Object arg) {
 		Captor captor = (Captor) o;
-		if(captor.gear == "gear1") System.out.println("Ligth Ctrl l57 Captor:" + " " + captor.gear + " " + captor.name + " " + captor.state);
 		if(captor.state) {
 			switch(captor.name){
 			case "open": 
 				if(this.gears.get(0).dc.door.open.state & this.gears.get(1).dc.door.open.state & this.gears.get(2).dc.door.open.state) {
-					System.out.println("AIE GEAR " + this.command);
-					this.gears.get(0).wc.update(this.command);
-					this.gears.get(1).wc.update(this.command);
-					this.gears.get(2).wc.update(this.command);
+					this.gears.get(0).wc.updateWheel(this.command);
+					this.gears.get(1).wc.updateWheel(this.command);
+					this.gears.get(2).wc.updateWheel(this.command);
 				}
 				break;
 			case "wheeldown":
@@ -80,11 +82,45 @@ public class LightCtrl extends AnalyserCaptor{
 					//tous a vrai
 					if(!this.gears.get(0).wc.signalError.state & !this.gears.get(1).wc.signalError.state & !this.gears.get(2).wc.signalError.state) {
 						if(this.command) {
-							//System.out.println("(this.gearState) lc.gearIsUp \n");
 							this.gearsIsUp();
 						}
 						else {
-							//System.out.println("(!this.gearState) lc.gearIsDown \n");
+							this.gearsIsDown();
+						}
+					}	
+				}
+			}
+		}
+	}
+	
+	public void update(Captor captor) {
+		if(captor.state) {
+			switch(captor.name){
+			case "open": 
+				if(this.gears.get(0).dc.door.open.state & this.gears.get(1).dc.door.open.state & this.gears.get(2).dc.door.open.state) {
+					this.gears.get(0).wc.updateWheel(this.command);
+					this.gears.get(1).wc.updateWheel(this.command);
+					this.gears.get(2).wc.updateWheel(this.command);
+				}
+				break;
+			case "wheeldown":
+			case "wheelup":
+				if(captor.gear == "gear1" & !this.gears.get(0).wc.signalError.state) this.gears.get(0).dc.closeTheDoor();
+				if(captor.gear == "gear2" & !this.gears.get(1).wc.signalError.state) this.gears.get(1).dc.closeTheDoor();
+				if(captor.gear == "gear3" & !this.gears.get(2).wc.signalError.state) this.gears.get(2).dc.closeTheDoor();
+				break;
+			case "wheelError":
+				this.gearsError();
+				this.error = true;
+				break;
+			case "close":
+				if(!this.error){
+					//tous a vrai
+					if(!this.gears.get(0).wc.signalError.state & !this.gears.get(1).wc.signalError.state & !this.gears.get(2).wc.signalError.state) {
+						if(this.command) {
+							this.gearsIsUp();
+						}
+						else {
 							this.gearsIsDown();
 						}
 					}	
