@@ -102,7 +102,7 @@ public class LightCtrlTestObserver {
 	/**wheelDown => fermeture de la porte concerné
 	 * 
 	 */
-	/*@Test
+	@Test
 	public void wheelDownTestWithoutError(){
 		this.lc.gears.get(0).dc.door.close.state = false;
 		this.lc.gears.get(0).dc.door.open.state = true;	
@@ -115,13 +115,13 @@ public class LightCtrlTestObserver {
 		//this.lc.gears.get(0).wc.wheels.wheelDown.setState(true);
 		
 		try {
-			Thread.sleep(1005);
+			Thread.sleep(1500);
 			assertTrue(this.lc.gears.get(0).dc.door.close.state);	
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 	@Test
 	public void wheelDownTestWithError(){
@@ -140,7 +140,7 @@ public class LightCtrlTestObserver {
 		//this.lc.gears.get(0).wc.wheels.wheelDown.setState(true);
 		
 		try {
-			Thread.sleep(1005);
+			Thread.sleep(1500);
 			assertFalse(this.lc.gears.get(0).dc.door.close.state);	
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -152,70 +152,66 @@ public class LightCtrlTestObserver {
 	 * 
 	 */
 	
-	/*@Test
+	@Test
 	public void AfterOpenedOneDoor(){
-		this.lc.gears.get(0).dc.openTheDoor();
-		assertFalse(this.lc.gears.get(0).dc.door.open.state);
+		this.lc.gears.get(0).dc.door.open.setState(true);
+		assertTrue(this.lc.gears.get(0).dc.door.open.state);
 		try {
-			Thread.sleep(1000);
-			assertTrue(this.lc.gears.get(0).dc.door.open.state);
+			Thread.sleep(1500);
 			assertFalse(this.lc.gears.get(0).wc.wheels.wheelProgress.state);
+			assertFalse(this.lc.gears.get(1).wc.wheels.wheelProgress.state);
+			assertFalse(this.lc.gears.get(2).wc.wheels.wheelProgress.state);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		assertFalse(this.lc.gears.get(0).wc.wheels.wheelProgress.state);
-	}*/
+	}
 	
-	/*@Test
-	public void AfterOpenedThowDoors(){
-		this.lc.gears.get(0).dc.openTheDoor();
-		this.lc.gears.get(1).dc.openTheDoor();
+	@Test
+	public void AfterOpenedTwoDoors(){
+		this.lc.gears.get(0).dc.door.open.setState(true);
+		this.lc.gears.get(1).dc.door.open.setState(true);
 		
-		assertFalse(this.lc.gears.get(0).dc.door.open.state);
-		assertFalse(this.lc.gears.get(1).dc.door.open.state);
+		assertTrue(this.lc.gears.get(0).dc.door.open.state);
+		assertTrue(this.lc.gears.get(1).dc.door.open.state);
 		
 		try {
-			Thread.sleep(2005);
-			assertTrue(this.lc.gears.get(0).dc.door.open.state);
+			Thread.sleep(1500);
 			assertFalse(this.lc.gears.get(0).wc.wheels.wheelProgress.state);
-			
-			assertTrue(this.lc.gears.get(1).dc.door.open.state);
 			assertFalse(this.lc.gears.get(1).wc.wheels.wheelProgress.state);
+			assertFalse(this.lc.gears.get(2).wc.wheels.wheelProgress.state);
 			
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void AfterOpenedThreeDoors(){
-		this.lc.gears.get(0).dc.openTheDoor();
-		this.lc.gears.get(1).dc.openTheDoor();
-		this.lc.gears.get(2).dc.openTheDoor();
+		this.lc.gears.get(0).dc.door.open.setState(true);
+		this.lc.gears.get(1).dc.door.open.setState(true);
+		this.lc.gears.get(2).dc.door.open.setState(true);
 		
-		assertFalse(this.lc.gears.get(0).dc.door.open.state);
-		assertFalse(this.lc.gears.get(1).dc.door.open.state);
-		assertFalse(this.lc.gears.get(2).dc.door.open.state);
-		
+		assertTrue(this.lc.gears.get(0).dc.door.open.state);
+		assertTrue(this.lc.gears.get(1).dc.door.open.state);
+		assertTrue(this.lc.gears.get(2).dc.door.open.state);
+	
 		try {
-			Thread.sleep(2005);
-			assertTrue(this.lc.gears.get(0).dc.door.open.state);
+			Thread.sleep(1500);
 			assertTrue(this.lc.gears.get(0).wc.wheels.wheelProgress.state);
 			
-			assertTrue(this.lc.gears.get(1).dc.door.open.state);
 			assertTrue(this.lc.gears.get(1).wc.wheels.wheelProgress.state);
 			
-			assertTrue(this.lc.gears.get(2).dc.door.open.state);
 			assertTrue(this.lc.gears.get(2).wc.wheels.wheelProgress.state);
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 }
