@@ -3,6 +3,7 @@ package controler;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import model.AnalyserCaptor;
 import model.Captor;
 import model.Lights;
 import view.LightsView;
@@ -17,7 +18,7 @@ public class LightCtrl extends AnalyserCaptor{
 	public ArrayList<SystemComputer> gears = new ArrayList<SystemComputer>();
 	public boolean command;
 	public boolean error = false;
-	
+	public int errorProbability = 0;
 	/**
 	 * public constructor. L'état initiale étant Up, on l'affiche à l'écran.
 	 * @param lightsview
@@ -83,7 +84,7 @@ public class LightCtrl extends AnalyserCaptor{
 		this.lights.setLightOrange(false);
 	}
 	/**
-	 * Observe les états des capteurs des roues pour activer les prochaines étapes 
+	 * Observe les états de tous les capteurs de chaque systeme pour activer les prochaines étapes concernant chaque système et le tableau de bords
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
@@ -93,9 +94,9 @@ public class LightCtrl extends AnalyserCaptor{
 			case "open": 
 				//quand une porte est ouverte on commande le mouvement de la roue
 				if(this.gears.get(0).dc.door.open.state & this.gears.get(1).dc.door.open.state & this.gears.get(2).dc.door.open.state) {
-					this.gears.get(0).wc.updateWheel(this.command);
-					this.gears.get(1).wc.updateWheel(this.command);
-					this.gears.get(2).wc.updateWheel(this.command);
+					this.gears.get(0).wc.updateWheel(this.command, this.errorProbability);
+					this.gears.get(1).wc.updateWheel(this.command, this.errorProbability);
+					this.gears.get(2).wc.updateWheel(this.command, this.errorProbability);
 				}
 				break;
 			case "wheeldown":
@@ -115,7 +116,11 @@ public class LightCtrl extends AnalyserCaptor{
 				//Quand les portes ont toutes étaient fermées (pas d'erreur détecté), alors on allume la lumière correspondante à l'action terminée
 				if(!this.error){
 					//tous a vrai
-					if(!this.gears.get(0).wc.signalError.state & !this.gears.get(1).wc.signalError.state & !this.gears.get(2).wc.signalError.state) {
+					//toutes les portes ont été fermées
+					if((this.gears.get(0).wc.wheels.wheelDown.state == true | this.gears.get(0).wc.wheels.wheelUp.state == true ) 
+						& (this.gears.get(1).wc.wheels.wheelDown.state == true | this.gears.get(1).wc.wheels.wheelUp.state == true ) 
+						& (this.gears.get(2).wc.wheels.wheelDown.state == true | this.gears.get(2).wc.wheels.wheelUp.state == true )) {
+						
 						if(this.command) {
 							this.gearsIsUp();
 						}

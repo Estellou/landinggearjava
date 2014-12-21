@@ -6,8 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import model.AnalyserCaptor;
 import model.Captor;
-import controler.AnalyserCaptor;
 
 public class WheelsView extends AnalyserCaptor{
 	public JLabel label;

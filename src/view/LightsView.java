@@ -5,8 +5,8 @@ import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import model.AnalyserCaptor;
 import model.Captor;
-import controler.AnalyserCaptor;
 
 public class LightsView extends AnalyserCaptor{
 	public JLabel label1;
@@ -26,8 +26,6 @@ public class LightsView extends AnalyserCaptor{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		/**Captor lightChanged = (Captor) arg.getClass();**/
 		Captor l = (Captor) o;
 		
 		switch(l.name){

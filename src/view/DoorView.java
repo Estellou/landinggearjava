@@ -5,8 +5,8 @@ import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import model.AnalyserCaptor;
 import model.Captor;
-import controler.AnalyserCaptor;
 
 public class DoorView extends AnalyserCaptor{
 	

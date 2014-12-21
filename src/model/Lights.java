@@ -29,18 +29,18 @@ public class Lights {
 	}
 	/**
 	 * 
-	 * @param lightGreen
+	 * @param state
 	 */
-	public void setLightGreen(boolean lightGreen) {
-		this.lightGreen.setState(lightGreen);
+	public void setLightGreen(boolean state) {
+		this.lightGreen.setState(state);
 	}
 	
-	public void setLightOrange(boolean lightOrange) {
-		this.lightOrange.setState(lightOrange);
+	public void setLightOrange(boolean state) {
+		this.lightOrange.setState(state);
 	}
 	
-	public void setLightRed(boolean lightRed) {
-		this.lightRed.setState(lightRed);
+	public void setLightRed(boolean state) {
+		this.lightRed.setState(state);
 	}
 
 }
